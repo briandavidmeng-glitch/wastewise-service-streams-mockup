@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waste Wise Service Streams Mockup</title>
+  <style>
+    :root {
+      --forest: #145c34;
+      --forest-dark: #0b3420;
+      --leaf: #2f9d63;
+      --mint: #e9f6ef;
+      --sage: #f4faf6;
+      --ink: #13231b;
+      --muted: #5f6f67;
+      --line: #d7e5dc;
+      --gold: #c99b32;
+      --blue: #2d6f8f;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(13, 52, 32, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #f7fbf8;
+      line-height: 1.5;
+    }
+
+    .section-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: var(--leaf);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 12px;
+    }
+
+    .intro-copy {
+      max-width: 780px;
+    }
+
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .service-section {
+      padding: 64px 0 84px;
+      background: #f7fbf8;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .6fr);
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      color: var(--forest-dark);
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.05;
+      margin-bottom: 14px;
+      letter-spacing: 0;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+
+    .signal-panel {
+      background: var(--forest-dark);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .signal-panel strong {
+      display: block;
+      font-size: 34px;
+      line-height: 1;
+      color: #d7f2df;
+      margin-bottom: 8px;
+    }
+
+    .signal-panel span {
+      display: block;
+      color: rgba(255, 255, 255, .74);
+      font-size: 14px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .service-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 12px 32px rgba(13, 52, 32, .08);
+      overflow: hidden;
+      min-height: 100%;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, var(--forest), var(--leaf), var(--gold));
+    }
+
+    .card-main {
+      padding: 24px 22px 20px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 15px;
+    }
+
+    .icon {
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--mint);
+      color: var(--forest);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    h3 {
+      color: var(--forest-dark);
+      font-size: 21px;
+      line-height: 1.18;
+      margin-bottom: 6px;
+      letter-spacing: 0;
+    }
+
+    .use-case {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .summary {
+      color: var(--muted);
+      margin-bottom: 18px;
+      min-height: 72px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .chip {
+      border: 1px solid #dbe9e1;
+      background: var(--sage);
+      color: #254234;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    details {
+      border-top: 1px solid var(--line);
+      background: #fbfdfb;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 22px;
+      color: var(--forest);
+      font-weight: 850;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--mint);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    .detail-list {
+      margin: 0;
+      padding: 0 22px 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: minmax(110px, .6fr) minmax(0, 1.25fr);
+      gap: 14px;
+      padding: 12px 0;
+      border-top: 1px solid #e7f0eb;
+    }
+
+    .detail-row dt {
+      color: var(--forest-dark);
+      font-weight: 850;
+    }
+
+    .detail-row dd {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .proof-strip {
+      margin-top: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(90deg, #ffffff, #eef8f2);
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(13, 52, 32, .06);
+    }
+
+    .proof-item {
+      min-height: 92px;
+      padding: 18px 16px;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      border-right: 1px solid var(--line);
+    }
+
+    .proof-item:last-child {
+      border-right: 0;
+    }
+
+    .proof-item b {
+      color: var(--forest-dark);
+      font-size: 15px;
+    }
+
+    .proof-item span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta-band {
+      margin-top: 34px;
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(11, 52, 32, .96), rgba(20, 92, 52, .92)),
+        var(--forest);
+      color: var(--white);
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-band h3 {
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .cta-band p {
+      color: rgba(255, 255, 255, .74);
+      margin-bottom: 0;
+    }
+
+    .cta-button {
+      border: 0;
+      border-radius: 8px;
+      color: var(--forest-dark);
+      background: #d7f2df;
+      padding: 13px 18px;
+      min-width: 172px;
+      font-weight: 850;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .14);
+    }
+
+    @media (max-width: 980px) {
+      .service-grid,
+      .section-header {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        min-height: auto;
+      }
+
+      .proof-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .service-section {
+        padding: 42px 0 60px;
+      }
+
+      .section-inner {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .detail-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .proof-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .proof-item:last-child {
+        border-bottom: 0;
+      }
+
+      .cta-band {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .cta-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="service-section" aria-labelledby="streams-title">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Operational Coverage</div>
+            <h2 id="streams-title">Waste Streams We Manage</h2>
+            <p>From everyday waste and recycling to regulated, technical, and project-based streams, Waste Wise coordinates the right vendors, service levels, and reporting across your portfolio.</p>
+          </div>
+          <aside class="signal-panel" aria-label="Portfolio signal">
+            <strong>20+</strong>
+            <span>service streams organized into a cleaner portfolio-wide management model.</span>
+          </aside>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="card-main">
+              <div class="card-top">
+                <div class="icon">R</div>
+                <div>
+                  <h3>Core Waste & Recycling</h3>
+                  <div class="use-case">Recurring site services</div>
+                </div>
+              </div>
+              <p class="summary">Right-sized recurring collection programs for high-volume commercial facilities, offices, and multi-site portfolios.</p>
+              <div class="chips">
+                <span class="chip">Trash</span>
+                <span class="chip">Cardboard</span>
+                <span class="chip">Mixed recycling</span>
+                <span class="chip">Wood</span>
+                <span class="chip">Glass</span>
+                <span class="chip">Metal / scrap</span>
+              </div>
+            </div>
+            <details>
+              <summary>View scope details</summary>
+              <dl class="detail-list">
+                <div class="detail-row"><dt>Trash</dt><dd>General solid waste collection, hauling, and disposal.</dd></div>
+                <div class="detail-row"><dt>Cardboard</dt><dd>Collection and recycling of corrugated cardboard materials.</dd></div>
+                <div class="detail-row"><dt>Mixed recycling</dt><dd>Collection of commingled recyclable materials, where accepted by local facilities.</dd></div>
+                <div class="detail-row"><dt>Wood</dt><dd>Collection and recycling or disposal of pallets, crates, and wood materials.</dd></div>
+                <div class="detail-row"><dt>Glass</dt><dd>Collection and recycling or disposal of glass materials, where applicable.</dd></div>
+                <div class="detail-row"><dt>Metal / scrap</dt><dd>Collection, recycling, and recovery of scrap metal materials.</dd></div>
+              </dl>
+            </details>
+          </article>
+
+          <article class="service-card">
+            <div class="card-main">
+              <div class="card-top">
+                <div class="icon">O</div>
+                <div>
+                  <h3>Organics & Composting</h3>
+                  <div class="use-case">Diversion programs</div>
+                </div>
+              </div>
+              <p class="summary">Compostable material programs that support diversion goals where local infrastructure and site operations allow.</p>
+              <div class="chips">
+                <span class="chip">Organics</span>
+                <span class="chip">Compost</span>
+                <span class="chip">Diversion support</span>
+              </div>
+            </div>
+            <details>
+              <summary>View scope details</summary>
+              <dl class="detail-list">
+                <div class="detail-row"><dt>Organics</dt><dd>Collection and processing of organic waste streams, where available.</dd></div>
+                <div class="detail-row"><dt>Compost</dt><dd>Compostable material collection and diversion support.</dd></div>
+              </dl>
+            </details>
+          </article>
+
+          <article class="service-card">
+            <div class="card-main">
+              <div class="card-top">
+                <div class="icon">F</div>
+                <div>
+                  <h3>Food Service & Specialty Waste</h3>
+                  <div class="use-case">Restaurants and mixed-use sites</div>
+                </div>
+              </div>
+              <p class="summary">Specialty collection services for food service operations that need dependable scheduling and clean vendor coordination.</p>
+              <div class="chips">
+                <span class="chip">Grease tank emptying</span>
+                <span class="chip">Used cooking oil</span>
+              </div>
+            </div>
+            <details>
+              <summary>View scope details</summary>
+              <dl class="detail-list">
+                <div class="detail-row"><dt>Grease tanks</dt><dd>Scheduled pumping and proper handling of grease interceptor or underground grease tank contents.</dd></div>
+                <div class="detail-row"><dt>Cooking oil</dt><dd>Collection and recycling or disposal of used cooking oil.</dd></div>
+              </dl>
+            </details>
+          </article>
+
+          <article class="service-card">
+            <div class="card-main">
+              <div class="card-top">
+                <div class="icon">S</div>
+                <div>
+                  <h3>Facility & Site Support</h3>
+                  <div class="use-case">Property operations</div>
+                </div>
+              </div>
+              <p class="summary">Project and site-support services for property teams handling exterior debris, moves, temporary needs, and cleanouts.</p>
+              <div class="chips">
+                <span class="chip">Portable toilets</span>
+                <span class="chip">Landscaping waste</span>
+                <span class="chip">Furniture waste</span>
+                <span class="chip">Move debris</span>
+              </div>
+            </div>
+            <details>
+              <summary>View scope details</summary>
+              <dl class="detail-list">
+                <div class="detail-row"><dt>Portable toilets</dt><dd>Rental, servicing, and removal of portable restroom units.</dd></div>
+                <div class="detail-row"><dt>Exterior waste</dt><dd>Collection, disposal, or diversion of landscaping debris and exterior site waste.</dd></div>
+                <div class="detail-row"><dt>Move waste</dt><dd>Removal, recycling, or disposal of office furniture, fixtures, and move-related debris.</dd></div>
+              </dl>
+            </details>
+          </article>
+
+          <article class="service-card">
+            <div class="card-main">
+              <div class="card-top">
+                <div class="icon">C</div>
+                <div>
+                  <h3>Secure & Regulated Services</h3>
+                  <div class="use-case">Compliance-sensitive streams</div>
+                </div>
+              </div>
+              <p class="summary">Documented handling for confidential, electronic, hazardous, and safety-related materials through appropriate providers.</p>
+              <div class="chips">
+                <span class="chip">Document shredding</span>
+                <span class="chip">E-waste</span>
+                <span class="chip">Hazardous waste</span>
+                <span class="chip">Medical / safety waste</span>
+              </div>
+            </div>
+            <details>
+              <summary>View scope details</summary>
+              <dl class="detail-list">
+                <div class="detail-row"><dt>Shredding</dt><dd>Secure collection and destruction of confidential documents.</dd></div>
+                <div class="detail-row"><dt>E-waste</dt><dd>Collection, recycling, and proper handling of electronic waste and related equipment.</dd></div>
+                <div class="detail-row"><dt>Regulated waste</dt><dd>Management of regulated waste streams in accordance with applicable requirements.</dd></div>
+                <div class="detail-row"><dt>Safety waste</dt><dd>Handling of applicable safety-related, first-aid, spill-response, or emergency-generated waste.</dd></div>
+              </dl>
+            </details>
+          </article>
+
+          <article class="service-card">
+            <div class="card-main">
+              <div class="card-top">
+                <div class="icon">T</div>
+                <div>
+                  <h3>Infrastructure & Project Waste</h3>
+                  <div class="use-case">Technical and capital work</div>
+                </div>
+              </div>
+              <p class="summary">Support for technical infrastructure, energy systems, construction debris, and facility upgrade waste streams.</p>
+              <div class="chips">
+                <span class="chip">Batteries / UPS</span>
+                <span class="chip">Cooling systems</span>
+                <span class="chip">Generator waste</span>
+                <span class="chip">Construction debris</span>
+              </div>
+            </div>
+            <details>
+              <summary>View scope details</summary>
+              <dl class="detail-list">
+                <div class="detail-row"><dt>Batteries</dt><dd>Collection and handling of batteries, UPS-related materials, and power infrastructure components.</dd></div>
+                <div class="detail-row"><dt>Mechanical</dt><dd>Handling of cooling system, mechanical, filtration, and water treatment-related waste streams.</dd></div>
+                <div class="detail-row"><dt>Energy systems</dt><dd>Management of generator, fuel, oil, filter, and energy system-related waste materials.</dd></div>
+                <div class="detail-row"><dt>Construction</dt><dd>Collection, hauling, recycling, or disposal of construction, renovation, demolition, and small-project debris.</dd></div>
+              </dl>
+            </details>
+          </article>
+        </div>
+
+        <div class="proof-strip" aria-label="Management capabilities">
+          <div class="proof-item"><b>Vendor coordination</b><span>One managed process across local providers.</span></div>
+          <div class="proof-item"><b>Service right-sizing</b><span>Match containers, frequency, and stream needs.</span></div>
+          <div class="proof-item"><b>Invoice oversight</b><span>Catch billing errors and unnecessary charges.</span></div>
+          <div class="proof-item"><b>Diversion reporting</b><span>Translate activity into usable performance metrics.</span></div>
+          <div class="proof-item"><b>Portfolio standards</b><span>Consistent service models across locations.</span></div>
+        </div>
+
+        <div class="cta-band">
+          <div>
+            <h3>Not sure where a waste stream fits?</h3>
+            <p>Waste Wise can review your current services and identify consolidation, savings, and diversion opportunities across the portfolio.</p>
+          </div>
+          <button class="cta-button">Request Portfolio Review</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
